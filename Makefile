@@ -26,7 +26,7 @@ doxy:
 emu: output/images/bzImage
 	qemu-system-i386 -kernel $<
 	
-output/images/bzImage:
+output/images/bzImage: output/.config
 	$(MAKE) build	
 	
 build: output/.config
