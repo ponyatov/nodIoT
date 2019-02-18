@@ -15,11 +15,16 @@ MAKEARGS += PROJECT_NAME=$(notdir $(CURDIR))
 DEFCONFIG_FILE=$(CURDIR)/defconfig
 DEFCONFIG := BR2_DEFCONFIG=$(DEFCONFIG_FILE)
 
+# location of default kernel defconfig
+KERNELCONFIG_FILE=$(CURDIR)/kernel.defconfig
+KERNELCONFIG := BR2_LINUX_KERNEL_CUSTOM_CONFIG_FILE=\"$(KERNELCONFIG_FILE)\"
+
 doxy:
 	rm -rf docs ; doxygen doxy.gen 1>/dev/null
 
 menu: buildroot/README
-	$(MAKE) $(MAKEARGS) $(DEFCONFIG) menuconfig
+	echo $(KERNELCONFIG) >> defconfig
+	$(MAKE) $(MAKEARGS) $(DEFCONFIG) defconfig menuconfig savedefconfig
 
 buildroot: buildroot/README
 buildroot/README:
