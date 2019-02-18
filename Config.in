@@ -1,0 +1,5 @@
+# BuildRoot 2 SubModule
+
+config BR2SM_PROJECT_NAME
+	string
+	option env="PROJECT_NAME"
