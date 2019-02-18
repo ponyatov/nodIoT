@@ -8,4 +8,5 @@ github: https://github.com/ponyatov/nodIoT
 manual: https://ponyatov.github.io/nodIoT
 
 @ref about
- 
+
+@ref install
