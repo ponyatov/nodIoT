@@ -21,8 +21,13 @@ KERNELCONFIG := BR2_LINUX_KERNEL_CUSTOM_CONFIG_FILE=\"$(KERNELCONFIG_FILE)\"
 
 doxy:
 	rm -rf docs ; doxygen doxy.gen 1>/dev/null
+	
+build: output/.config
+	$(MAKE) $(MAKEARGS) $(DEFCONFIG) defconfig
+	$(MAKE) $(MAKEARGS) $(DEFCONFIG)
 
-menu: buildroot/README
+menu: output/.config
+output/.config: buildroot/README
 	echo $(KERNELCONFIG) >> defconfig
 	$(MAKE) $(MAKEARGS) $(DEFCONFIG) defconfig menuconfig savedefconfig
 
