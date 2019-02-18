@@ -17,18 +17,28 @@ DEFCONFIG := BR2_DEFCONFIG=$(DEFCONFIG_FILE)
 
 # location of default kernel defconfig
 KERNELCONFIG_FILE=$(CURDIR)/kernel.defconfig
-KERNELCONFIG := BR2_LINUX_KERNEL_CUSTOM_CONFIG_FILE=\"$(KERNELCONFIG_FILE)\"
+KERNELCONFIG := BR2_LINUX_KERNEL_CUSTOM_CONFIG_FILE=\"$(KERNELCONFIG_FILE)\" \
+				BR2_LINUX_KERNEL_DEFCONFIG=\"$(KERNELCONFIG_FILE)\"
 
 doxy:
 	rm -rf docs ; doxygen doxy.gen 1>/dev/null
 	
+emu: output/images/bzImage
+	qemu-system-i386 -kernel $<
+	
+output/images/bzImage:
+	$(MAKE) build	
+	
 build: output/.config
-	$(MAKE) $(MAKEARGS) $(DEFCONFIG) defconfig
+	$(MAKE) $(MAKEARGS) $(DEFCONFIG) $(KERNELCONFIG) defconfig
 	$(MAKE) $(MAKEARGS) $(DEFCONFIG)
+	
+kernel: buildroot/README
+	$(MAKE) $(MAKEARGS) $(DEFCONFIG) $(KERNELCONFIG) linux-menuconfig
 
 menu: buildroot/README
 	echo $(KERNELCONFIG) >> defconfig
-	$(MAKE) $(MAKEARGS) $(DEFCONFIG) defconfig menuconfig savedefconfig
+	$(MAKE) $(MAKEARGS) $(DEFCONFIG) $(KERNELCONFIG) defconfig menuconfig savedefconfig
 
 buildroot: buildroot/README
 buildroot/README:
