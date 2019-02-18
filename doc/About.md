@@ -1,3 +1,4 @@
 # About {#about}
 
-This is a demo system hosts node-red engine on embedded Linux @ref hardware
+This is a demo provides build scripts for @ref emlinux system
+which hosts @ref nodered engine on some @ref hardware.
