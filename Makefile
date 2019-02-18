@@ -26,8 +26,7 @@ build: output/.config
 	$(MAKE) $(MAKEARGS) $(DEFCONFIG) defconfig
 	$(MAKE) $(MAKEARGS) $(DEFCONFIG)
 
-menu: output/.config
-output/.config: buildroot/README
+menu: buildroot/README
 	echo $(KERNELCONFIG) >> defconfig
 	$(MAKE) $(MAKEARGS) $(DEFCONFIG) defconfig menuconfig savedefconfig
 
