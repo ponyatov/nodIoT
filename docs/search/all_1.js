@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['hardware',['HardWare',['../hardware.html',1,'']]]
+  ['embedded_20linux',['embedded Linux',['../emlinux.html',1,'']]]
 ];
