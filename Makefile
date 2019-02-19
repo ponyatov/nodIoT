@@ -11,6 +11,9 @@ MAKEARGS += BR2_EXTERNAL=$(CURDIR)
 #transmit project name to be able to use it in kconfig
 MAKEARGS += PROJECT_NAME=$(notdir $(CURDIR))
 
+# file system overlay
+OVERLAY_CONFIG = BR2_ROOTFS_OVERLAY=\"$(CURDIR)/overlay\"
+
 # location of default defconfig
 DEFCONFIG_FILE=$(CURDIR)/defconfig
 DEFCONFIG := BR2_DEFCONFIG=$(DEFCONFIG_FILE)
@@ -38,6 +41,7 @@ kernel: buildroot/README
 
 menu: buildroot/README
 	echo $(KERNELCONFIG) >> defconfig
+	echo $(OVERLAY_CONFIG) >> defconfig
 	$(MAKE) $(MAKEARGS) $(DEFCONFIG) $(KERNELCONFIG) defconfig menuconfig savedefconfig
 
 buildroot: buildroot/README
