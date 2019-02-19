@@ -27,7 +27,7 @@ doxy:
 	rm -rf docs ; doxygen doxy.gen 1>/dev/null
 	
 emu: output/images/bzImage
-	qemu-system-i386 -kernel $<
+	qemu-system-i386 -m 1G -kernel $<
 	
 output/images/bzImage: output/.config
 	$(MAKE) build	
